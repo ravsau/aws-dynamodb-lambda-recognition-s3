@@ -39,14 +39,12 @@ def lambda_handler(event, context):
         # Calls rekognition DetectLabels API to detect labels in S3 object
         response = detect_labels(bucket, key)
         
-        tosend=""
         toDynamo=[]
         
         for Label in response["Labels"]:
            # print (Label["Name"] + Label["Confidence"])
             
             print ('{0} - {1}%'.format(Label["Name"], Label["Confidence"]))
-            tosend+= '{0} - {1}% '.format(Label["Name"], Label["Confidence"])
             
             Name= Label["Name"]
             Confidence = Label["Confidence"]
